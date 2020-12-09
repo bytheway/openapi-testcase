@@ -13,14 +13,7 @@ import (
 
 func validateOpenAPI(path string) (bool, *validate.Result) {
 
-	munged, deferFunc, err := processOpenAPI(path)
-	defer deferFunc()
-
-	if err != nil {
-		log.Fatalf("Error proecessing openapi.yaml: %s", err)
-	}
-
-	doc, err := loads.Spec(munged)
+	doc, err := loads.Spec(path)
 	if err != nil {
 		log.Fatalf("Error loading %s: %s", path, err)
 	}
